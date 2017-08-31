@@ -3,4 +3,13 @@
 
 <% block('page_js', '/scripts/pages/simple.js') -%>
 
-<div id="example1">{{message}}</div>
+<div id="example1">
+   {{message}}
+</div>
+
+<div id="app-2">
+   <span v-bind:title="message">
+      鼠标悬停几秒查看状态
+   </span>
+
+</div>
