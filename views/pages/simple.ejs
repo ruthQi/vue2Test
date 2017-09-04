@@ -13,3 +13,47 @@
    </span>
 
 </div>
+
+<div id="app-3">
+   <p v-if="seen">现在你看见我了</p>
+</div>
+
+<div id="app-4">
+   <ol>
+      <li v-for="todo in todos">
+         {{todo.text}}
+      </li>
+   </ol>
+</div>
+
+<div id="app-5">
+   <p>{{message}}</p>
+   <button v-on:click="reverseMessage">逆转消息</button>
+</div>
+
+<div id="app-6">
+   <p>{{message}}</p>
+   <input v-model="message"/>
+</div>
+
+<!--组件-->
+<!--(v-bind:href == :href ; v-on:click == @click)-->
+<div id="app-7">
+   <ol>
+      <todo-item 
+         v-for="item in items" 
+         v-bind:todo = "item" 
+         v-bind:key="item.id">
+      </todo-item>
+   </ol>
+</div>
+<!--(v-once:执行一次更新，当数据改变时，插值处的内容不会更新)-->
+<span v-once>这个值将不会改变: {{msg}}</span>
+<!--(v-html:输出真正的html)-->
+<div v-html="rawHtml"></div>
+<!--每个绑定都只能包含单个表达式-->
+<div>{{ok ? 'Yes' : 'No'}}</div>
+<!--触发submit时调用event.preventDefault()-->
+<form v-on:submit.prevent="onSubmit"></form>
+
+<!--=======================计算属性==============================-->
