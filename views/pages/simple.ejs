@@ -57,3 +57,188 @@
 <form v-on:submit.prevent="onSubmit"></form>
 
 <!--=======================计算属性==============================-->
+
+<div id="app-8">
+   <p>Original message: {{message}}</p>
+   <p>Computed reversed message: {{reversedMessage}}</p>
+   <p>Methods reversed message: {{reverseMessage()}}</p>
+   <p>{{fullName}}</p>
+</div>
+
+<div id="watch-example">
+   <p>
+      Ask a yes/no question:
+      <input v-model="question">
+   </p>
+   <p>{{answer}}</p>
+</div>
+
+<!--=====================条件渲染=============================-->
+<div v-if="Math.random() > 0.5">
+   Now you can see
+</div>
+<div v-else>
+   Now you don't
+</div>
+
+<div id="app-9">
+   <div v-if=" type === 'A' ">
+      A
+   </div>
+   <div v-else-if=" type ==='B' ">
+      B
+   </div>
+   <div v-else-if=" type === 'C' ">
+      C
+   </div>
+   <div v-else>
+      Not A/B/C
+   </div>
+</div>
+
+<!--Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。-->
+<!--Vue 为你提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。只需添加一个具有唯一值的 key 属性-->
+<div id="app-10">
+   <template v-if="loginType === 'username'">
+      <label>Username</label>
+      <input placeholder="Enter your username" key="username">
+   </template>
+   <template v-else>
+      <label>Email</label>
+      <input placeholder="Enter your email address" key="email">
+   </template>
+   <button @click="changeType">Toggle LoginType</button>
+   <!--v-show与v-if的区别是：v-show控制的是display属性，展示与否；v-if控制的是dom元素的存在与否-->
+   <h1 v-show="isShow">show</h1>
+</div>
+
+<!--===========================列表渲染=================================-->
+<ul id="app-11">
+   <li v-for="(value, key, index) in object">
+      {{index}}. {{key}}: {{value}}
+   </li>
+   <li v-for="n in eventNumbers">
+      {{n}}
+   </li>
+   <!--v-for的优先级高于v-if;这意味着 v-if 将分别重复运行于每个 v-for 循环中-->
+   <li v-for="todo in todos" v-if="!todo.isComplete">
+      {{ todo.num }}
+   </li>
+</ul>
+
+<div id="app-12">
+   <input 
+      v-model="newTodoText" 
+      v-on:keyup.enter="addNewTodo" 
+      placeholder="Add a todo"/>
+   <ul>
+      <li 
+         is="todo-item"
+         v-for="(todo, index) in todos"
+         v-bind:key="todo.id"
+         v-bind:title="todo.title"
+         v-on:remove="todos.splice(index, 1)">
+         
+      </li>
+   </ul>
+</div>
+
+<!--======================事件处理==================================-->
+
+<div id="app-13">
+   <button v-on:click="count += 1">监听事件：增加1</button>
+   <button v-on:click="green">方法事件</button>
+   <button v-on:click="say('hi', $event)">内联处理器方法</button>
+   <!--事件修饰符click：.stop, .prevent, .capture, .self, .once;使用修饰符时，顺序很重要-->
+   <!--键值修饰符keyup：.enter, .tab, .delete, .esc, .space, .up, .down, .left, .right-->
+   <!--修饰键：ctrl, alt, shift, meta;修饰键比正常的按键不同；
+   修饰键和 keyup 事件一起用时，事件引发时必须按下正常的按键。-->
+   <button @click.ctrl="say('what')">修饰键</button>
+   <button @keyup.ctrl="say('button')">修饰键Key</button>
+   <!--鼠标按钮修饰：.left, .right, .middle-->
+   <button @click="say('mouse')">鼠标按键</button>
+   <p>点击{{count}}次</p>
+</div>
+
+<!--============================表单====================================-->
+
+<div id="app-14">
+   <!--文本-->
+   <input v-model="message"/>
+   <p>message is : {{message}}</p>
+   <!--多行文本-->
+   <textarea v-model="multiMessage"></textarea>
+   <p style="white-space:pre-line">multiMessage is : {{multiMessage}}</p>
+   <!--复选框-->
+   <input type="checkbox" id="checkbox" v-model="checked"/>
+   <label for="checkbox">{{checked}}</label>
+
+   <div >
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames"/>
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames"/>
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames"/>
+      <label for="mike">Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+   </div>
+
+   <!--单选按钮-->
+   <div>
+      <input type="radio" id="one" value="One" v-model="picked"/>
+      <label for="one">One</label>
+      <input type="radio" id="two" value="Two" v-model="picked"/>
+      <label for="two">Two</label>
+      <span>Picked: {{picked}}</span>
+   </div>
+
+   <!--select列表-->
+   <div style="display:inline-block">
+      <select v-model="selected">
+         <option disabled value="">请选择</option>
+         <option>A</option>
+         <option>B</option>
+         <option>C</option>
+      </select>
+      <span>{{selected}}</span>
+   </div>
+   <div style="display:inline-block">
+      <select v-model="selectedMulti" multiple>
+         <option disabled value="">请选择</option>
+         <option>A</option>
+         <option>B</option>
+         <option>C</option>
+      </select>
+      <span>{{selectedMulti}}</span>
+   </div>
+   <div style="display:inline-block">
+      <select v-model="forSelected">
+         <option v-for="option in options" v-bind:value="option.value">
+            {{option.text}}
+         </option>
+         
+      </select>
+      <span>{{forSelected}}</span>
+   </div>
+   <!--修饰符lazy:在change事件中同步，不是input事件同步-->
+   <input v-model.lazy.trim="message"/>
+   <p>{{message}}</p>
+   <input v-model.number="age" type="number"/>
+   <p>{{age}}</p>
+</div>
+
+<!--=============================组件===================================-->
+
+<div id="app-15">
+   <input v-model="parentMsg"/>
+   <my-component v-bind:msg="parentMsg" v-bind:arr="parentArr"></my-component>
+   <select>
+      <option v-for="option in parentArr">{{option}}</option>
+   </select>
+   <div>
+      <p>{{total}}</p>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+      <button-counter v-on:increment="incrementTotal"></button-counter>
+   </div>
+</div>
