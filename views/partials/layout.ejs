@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"></meta>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <meta name="keyword" content="">
     <meta name="description" content="">
-    <title><%-blocks.page_title%></title>
+    <meta name="format-detection" content="telephone=no" />
+    <title><%=blocks.page_title%></title>
+    <% if (blocks.page_css) { %>
     <link rel="stylesheet" href="<%-blocks.page_css%>">
+    <% } %>
+    <script type="text/javascript">
+       (function(){
+          var doc = document.documentElement;
+          var width = doc.getBoundingClientRect().width;
+          if(!/ipod|iphone|ipad|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|win ce/i.test(navigator.userAgent)) {
+             width = 750;
+          }
+          var fontSize = width / 7.5;
+          fontSize = fontSize < 166 ? fontSize : 166;
+          doc.style.fontSize = fontSize + 'px';
+       })();
+    </script>
 </head>
 <body>
     <%- body -%>
-    <script type="text/javascript" src="<%-blocks.page_js%>"></script>
+    <% if (blocks.page_js) { %>
+    <script type="text/javascript" src="<%-blocks.page_js%>" defer></script>
+    <% } %>
 </body>
 </html>

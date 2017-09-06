@@ -356,3 +356,14 @@ var app15 = new Vue({
       }
    }
 })
+
+
+var slotComponent = {
+   template: '#slot-template'
+}
+var app16 = new Vue({
+   el: '#app-16',
+   components: {
+      'slot-component': slotComponent
+   }
+})

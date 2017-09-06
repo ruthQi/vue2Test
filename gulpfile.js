@@ -14,6 +14,7 @@ var devConf = require('./dependencies/conf.js');
 var spriteConfig = require('./dependencies/sprite.js');
 var webpackConfig = require('./dependencies/webpack.js');
 var cssMinify = require('./dependencies/cssMinify.js');
+const px2rem = require('gulp-px3rem');
 
 var env = 'development';
 
@@ -43,6 +44,9 @@ gulp.task('scss2css', function(cb) {
             .on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['chrome >= 34', 'ios >= 7', 'android >= 2.0']
+        }))
+        .pipe(px2rem({
+            remUnit: 100
         }))
         .pipe(cssMinify({}, env))
         .pipe(gulp.dest(conf.dist));

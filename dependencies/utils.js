@@ -1,16 +1,32 @@
-
+/**
+ * @description：
+ * @author: maoyh@corp.netease.com
+ */
 'use strict';
-var fs = require('fs');
-var path = require('path');
-var type = function(type) {
+const fs = require('fs');
+const path = require('path');
+const type = function(type) {
     return function(data) {
         return Object.prototype.toString.call(data).slice(8, -1).toLowerCase() === (type).toLowerCase();
     };
 };
-var isObj = type('object');
+const isObj = type('object');
 
 module.exports = {
     isObj: isObj,
+
+    json2str: function(json) {
+        return isObj(json) || Array.isArray(json) ? JSON.stringify(json) : json;
+    },
+
+    replaceQueryString: function(url, param, value) {
+        let reg = new RegExp('([?|&])' + param + '=.*?(&|$)', 'i');
+        if (url.match(reg)) {
+            return url.replace(reg, '$1' + param + '=' + value + '$2');
+        } else {
+            return url + (/\?/.test(url) ? '&' : '?') + param + '=' + value;
+        }
+    },
 
     extend: function extend(a, b) {
         isObj(b) && Object.keys(b).map((key) => {
@@ -38,9 +54,9 @@ module.exports = {
 
     getFiles: function(dir, callback) {
         if (fs.statSync(dir).isDirectory()) {
-            var files = fs.readdirSync(dir);
+            let files = fs.readdirSync(dir);
             files.forEach(function(name) {
-                var _path = path.join(dir, name);
+                let _path = path.join(dir, name);
                 fs.statSync(_path).isDirectory() ? this.getFiles(_path, callback) : callback(_path);
             }.bind(this));
         } else {
@@ -49,7 +65,7 @@ module.exports = {
     },
 
     mkdir: function(dir, callback) {
-        var mkdir = function(p, opts, made) {
+        let mkdir = function(p, opts, made) {
             if (!opts || typeof opts !== 'object') {
                 opts = {
                     mode: opts || function(err) {
@@ -69,7 +85,7 @@ module.exports = {
                         mkdir(p, opts, made);
                         break;
                     default:
-                        var stat;
+                        let stat;
                         try {
                             stat = fs.statSync(p);
                         } catch (err1) {
@@ -88,7 +104,7 @@ module.exports = {
         this.mkdir(filePath, function(err) {
             if (err) {
                 return callback(err)
-            };
+            }
         });
         fs.writeFile(filePath, content, callback);
     }

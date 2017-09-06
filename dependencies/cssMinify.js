@@ -30,10 +30,10 @@ module.exports = function(opts, env) {
         if(!isDev) {
             var minimize = new CleanCSS(options).minify(file.contents.toString()).styles;
             file.contents = new Buffer(minimize);
-            file.path && options.pathReplace.forEach((item) => {
-                file.path = file.path.replace(item[0], item[1]);
-            });
         }
+        file.path && options.pathReplace.forEach((item) => {
+            file.path = file.path.replace(item[0], item[1]);
+        });
         options.showLog && console.log('--- css mimify: --- ', file.relative);
         cb(null, file);
     });
