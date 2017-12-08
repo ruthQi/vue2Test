@@ -1,6 +1,4 @@
-/**
- * Created by zhaizheng on 2017/3/30.
- */
+
 import uri from 'utils/requestAdapter';
 
 let search = {
