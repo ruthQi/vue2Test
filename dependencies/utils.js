@@ -1,7 +1,4 @@
-/**
- * @description：
- * @author: maoyh@corp.netease.com
- */
+
 'use strict';
 const fs = require('fs');
 const path = require('path');
