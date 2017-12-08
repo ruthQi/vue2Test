@@ -1,7 +1,4 @@
-/**
- * @description：
- * @author: maoyh@corp.netease.com
- */
+
 'use strict';
 const path = require('path');
 const webpack = require('webpack');
