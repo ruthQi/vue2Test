@@ -1,8 +1,4 @@
-/**
- * @author: zqzhai
- * @description：
- *
- */
+
 'use strict';
 
 import uri from 'utils/uri';
