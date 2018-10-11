@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var utils = require('./utils.js');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var getConfig = function(env) {
@@ -13,7 +14,7 @@ var getConfig = function(env) {
     //     })
     // ];
     // var plugins = [new ExtractTextPlugin('[name].scss')];
-    var plugins = [];
+   var plugins = [new VueLoaderPlugin()];
     if (!isDev) {
         plugins = plugins.concat([
             new webpack.optimize.UglifyJsPlugin({
@@ -34,17 +35,14 @@ var getConfig = function(env) {
     return {
         cache: true,
         context: path.join(process.cwd(), ''),
-        entry: {
-            'index': ['./public/scripts/pages/index.js']
-        },
-        output: {
+         output: {
             path: path.join(process.cwd(), './public/dist/scripts/pages'),
             filename: '[name].js',
             publicPath: './public/dist/'
-        },
+         },
         externals: {},
         module: {
-            loaders: [{
+            rules: [{
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loader: "url-loader",
                 query: {}
@@ -110,20 +108,19 @@ var getConfig = function(env) {
 };
 
 
-module.exports = function(conf, env) {
-    var filelist = [],
-        entry = {};
-    var _path = path.resolve(process.cwd(), conf.src);
-    utils.getFiles(_path, function(_path) {
-        filelist.push(_path);
-    });
-    filelist.forEach(function(item) {
-        var arr = utils.slash(item).match(conf.regexp);
-        entry[arr[1]] = ['.' + arr[0]];
-    });
-    filelist = [];
-
-    return utils.extend(getConfig(env), {
-        entry: entry
-    });
+module.exports = function (conf, env) {
+   var filelist = [],
+      entry = {};
+   var _path = path.resolve(process.cwd(), conf.src);
+   utils.getFiles(_path, function (_path) {
+      filelist.push(_path);
+   });
+   filelist.forEach(function (item) {
+      var arr = utils.slash(item).match(conf.regexp);
+      entry[arr[1]] = ['.' + arr[0]];
+   });
+   filelist = [];
+   return utils.extend(getConfig(env), {
+      entry: entry
+   });
 };

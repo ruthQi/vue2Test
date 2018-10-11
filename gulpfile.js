@@ -53,8 +53,6 @@ gulp.task('scss2css', function(cb) {
 });
 
 gulp.task('webpack', function(cb) {
-
-
     webpack(webpackConfig(devConf.webpackjs, env), function(err, stats) {
         cb();
     });
