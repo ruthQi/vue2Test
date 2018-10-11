@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>v-for</title>
+   <style>
+      table{
+         width: 600px;
+         text-align: center;
+         border: 1px solid orange;
+      }
+      thead{
+         background-color: orange;
+      }
+   </style>
+</head>
+<body>
+   <div id="app">
+      <!--v-for可以遍历array,object, string和number
+         必须使用特定的语法(item, index) in items, 为当前遍历元素提供别名。 
+         v-for的优先级别高于v-if之类的其他指令-->
+      <p>
+         <span v-for="(score, index) in scores">
+            {{index + ":" + score}}
+         </span>
+      </p>
+      <p>
+         <span v-for="(item, key, index) in obj">
+            {{index + ":" + key + ":" + item}}
+         </span>
+      </p>
+      <p>
+         <span v-for="s in str">
+            {{s}}
+         </span>
+      </p>
+      <p>
+         <span v-for="n in num">
+            {{n}}
+         </span>
+      </p>
+      <table>
+         <thead>
+            <tr>
+               <td>姓名</td>
+               <td>年龄</td>
+               <td>性别</td>
+            </tr>
+         </thead>
+         <tbody>
+            <tr v-for="person in persons">
+               <td>{{person.name}}</td>
+               <td>{{person.age}}</td>
+               <td>{{person.sex}}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let vm = new Vue({
+         el:'#app',
+         data: {
+            scores: [90, 85, 76, 58],
+            obj: {name: 'haha', age: 19, height: 160},
+            str: 'hello world!',
+            num: '1881067',
+            persons: [
+               {name: '张三', age: 30, sex: '男'},
+               {name: '李四', age: 20, sex: '男'},
+               {name: '王五', age: 19, sex: '女' },
+               {name: '赵六', age: 40, sex: '男' }
+            ]
+         }
+      })
+   </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>v-if</title>
+</head>
+<body>
+   <div id="app">
+      <!--v-if：接受一个返回布尔值的表达式；如果为false,整个元素不渲染-->
+      <p v-if="show">要展示的内容</p>
+      <p v-if="hide">要隐藏的内容</p>
+      <p v-if="height > 1.65">身高：{{height}}</p>
+      <p v-if="height1 > 1.65">身高1：{{height}}</p>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let vm = new Vue({
+         el:'#app',
+         data:{
+            show: true,
+            hide: false,
+            height: 1.68,
+            height1: 1.55
+         }
+      })
+   </script>
+</body>
+</html>

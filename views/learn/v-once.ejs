@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>v-once</title>
+</head>
+<body>
+   <div id="app">
+      <!--v-once：只渲染元素和组件一次；执行一次性地插值，当数据改变时，插值处的内容不会更新。-->
+      <p v-once>原始值：{{msg}}</p>
+      <p>修改值：{{msg}}</p>
+      <input type="text" v-model="msg"/>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let vm = new Vue({
+         el:'#app',
+         data: {
+            msg:'今天天气很好'
+         }
+      })
+   </script>
+</body>
+</html>

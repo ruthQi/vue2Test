@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>vue learn</title>
+</head>
+<body>
+  <div id="app">
+     <p>{{message}}</p>
+     <input v-model="message"/><!--使用v-model双向控制-->
+  </div> 
+  <script src="/scripts/assets/vue.min.js"></script>
+  <script>
+     //创建vue实例
+     //MVVM:Model-View-ViewModel
+     let vm = new Vue({
+        el:'#app',//view
+        data: {//model
+           message: '呵呵'
+        }
+     })
+     
+  </script>
+</body>
+</html>
