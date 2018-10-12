@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>v-on</title>
+</head>
+<body>
+   <div id="app">
+      <p :style="{color: fontColor}">{{msg}}</p>
+      <button v-on:click="msg = '天气好热'">改变内容</button>
+      <button @click="changeMsg()">改变消息</button>
+      <button @click="changeColor">改变颜色</button>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let vm = new Vue({
+         el: '#app',
+         data: {
+            msg:'今天天气很好！',
+            fontColor: 'red'
+         },
+         methods: {
+            changeMsg(){
+               this.msg = '测试消息改变';
+            },
+            changeColor(){
+               this.fontColor = 'green';
+            }
+         }
+      })
+   </script>
+</body>
+</html>

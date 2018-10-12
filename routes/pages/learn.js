@@ -35,6 +35,14 @@ Router.get('/v-bind', function (req, res, next) {
    res.render('learn/v-bind')
 });
 
+Router.get('/v-on', function (req, res, next) {
+   res.render('learn/v-on')
+});
+
+Router.get('/exercise', function (req, res, next) {
+   res.render('learn/exercise')
+});
+
 
 
 module.exports = Router;

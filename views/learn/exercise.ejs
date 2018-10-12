@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>exercise</title>
+   <style>
+      #app{
+         width: 600px;
+         margin: 0 auto;
+      }
+      fieldset{
+         border: 1px solid orange;
+         margin-bottom: 20px;
+      }
+      fieldset input{
+         width: 200px;
+         height: 20px;
+         margin-bottom: 10px;
+      }
+      table{
+         width: 600px;
+         border: 2px solid orange;
+         text-align: center;
+      }
+      thead{
+         background-color: orange;
+      }
+
+   </style>
+</head>
+<body>
+   <div id="app">
+      <fieldset>
+         <legend>拇指哥学生录入系统</legend>
+         <div>
+            <span>姓名：</span>
+            <input type="text" placeholder="请输入姓名" v-model="userName"/>
+            <!-- <input type="text" placeholder="请输入姓名" v-model="newUser.name" /> -->
+         </div>
+         <div>
+            <span>年龄：</span>
+            <input type="text" placeholder="请输入年龄" v-model="userAge"/>
+            <!-- <input type="text" placeholder="请输入年龄" v-model="newUser.age" /> -->
+         </div>
+         <div>
+            <span>性别：</span>
+            <!-- <select v-model="newUser.sex">
+               <option value="男">男</option>
+               <option value="女">女</option>
+            </select> -->
+            <select v-model="userSex">
+               <option value="男">男</option>
+               <option value="女">女</option>
+            </select>
+         </div>
+         <div>
+            <span>手机号：</span>
+            <input type="text" placeholder="请输入手机号" v-model="userPhone"/>
+            <!-- <input type="text" placeholder="请输入手机号" v-model="newUser.phone" /> -->
+         </div>
+         <button @click="createNewUser()">创建新用户</button>
+      </fieldset>
+      <table>
+         <thead>
+            <tr>
+               <td>姓名</td>
+               <td>年龄</td>
+               <td>性别</td>
+               <td>手机号</td>
+               <td>删除</td>
+            </tr>
+         </thead>
+         <tbody>
+            <tr v-for="(person, index) in persons">
+               <td>{{person.name}}</td>
+               <td>{{person.age}}</td>
+               <td>{{person.sex}}</td>
+               <td>{{person.phone}}</td>
+               <td>
+                  <button @click="deleteUser(index)">删除</button>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      //方式1：使用对象的方式newUser = {name:'', age:0, sex: '男', phone:''}
+      //方式2：使用计算属性
+      let vm = new Vue({
+         el:'#app',
+         data: {
+            persons: [
+               {name:'张三', age: 20, sex: '男', phone: '188101014'},
+               { name: '李四', age: 30, sex: '男', phone: '188101013' },
+               { name: '王五', age: 40, sex: '男', phone: '188101012' },
+               { name: '赵六', age: 18, sex: '女', phone: '188101011' }
+            ],
+            //newUser: {name:'', age:0, sex: '男', phone:''}
+            userName:'',
+            userAge:0,
+            userSex:'男',
+            userPhone:''
+         },
+         methods: {
+            createNewUser(){
+               //校验
+               if(this.newUser.name === ''){
+                  alert('请输入姓名');
+                  return;
+               };
+               if(this.newUser.age <= 0){
+                  alert('请输入正确的年龄');
+                  return;
+               };
+               if(this.newUser.phone === ''){
+                  alert('请输入手机号');
+                  return;
+               };
+               //创建新用户
+               this.persons.unshift(this.newUser);
+               //清空当前用户
+               //this.newUser = { name: '', age: 0, sex: '男', phone: '' };
+               this.userName = '';
+               this.userAge = 0;
+               this.userSex = '男';
+               this.userPhone = '';
+            },
+            
+            deleteUser(index){
+               this.persons.splice(index, 1);
+            }
+         },
+         computed: {
+            newUser(){
+              return { name: this.userName, age: this.userAge, sex: this.userSex, phone: this.userPhone }
+            } 
+         }
+      })
+   </script>
+</body>
+</html>
