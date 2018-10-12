@@ -43,6 +43,10 @@ Router.get('/exercise', function (req, res, next) {
    res.render('learn/exercise')
 });
 
+Router.get('/computed', function (req, res, next) {
+   res.render('learn/computed')
+});
+
 
 
 module.exports = Router;
