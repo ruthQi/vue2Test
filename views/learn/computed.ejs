@@ -12,7 +12,7 @@
       <p>翻转值：{{name.split('').reverse().join('')}}</p>
       <!--不会缓存，每次调用都会重新请求-->
       <p>函数调用：{{reverseName()}}</p>
-      <!--会缓存，多处调用，都会使用缓存值-->
+      <!--会缓存，多处调用，都会使用缓存值，使用计算量大，不经常改变的时候使用-->
       <p>计算属性：{{reverse}}</p>
    </div>
    <script src="/scripts/assets/vue.min.js"></script>
