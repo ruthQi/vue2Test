@@ -8,6 +8,10 @@ module.exports = function(app) {
     app.use('/', index);
     app.use('/simple', Simple);
     app.use('/search', search);
-    app.use('/learn', learn)
+    app.use('/learn', learn);
+
+    app.get('/vuex', function(req, res, next){
+      res.render('pages/vuex')
+    })
 
 };

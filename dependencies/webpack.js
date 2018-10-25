@@ -96,7 +96,7 @@ var getConfig = function(env) {
             }]
         },
         resolve: {
-            extensions: ['.js', '.jsx', 'vue', '.scss'],
+            extensions: ['.js', '.jsx', '.vue', '.scss'],
             modules: [path.resolve('./public/scripts/'), path.resolve('./public/scss/'), path.resolve('./node_modules/')],
             alias: {
                 scss: path.resolve('./public/scss/'),
