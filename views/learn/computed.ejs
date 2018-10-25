@@ -7,7 +7,32 @@
    <title>computed</title>
 </head>
 <body>
-   <div id="app"></div>
-   
+   <div id="app">
+      <p>姓名：{{name}}</p>
+      <p>翻转值：{{name.split('').reverse().join('')}}</p>
+      <!--不会缓存，每次调用都会重新请求-->
+      <p>函数调用：{{reverseName()}}</p>
+      <!--会缓存，多处调用，都会使用缓存值-->
+      <p>计算属性：{{reverse}}</p>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let vm = new Vue({
+         el: '#app',
+         data:{
+            name: 'Hello Jack'
+         },
+         methods: {
+            reverseName(){
+               return this.name.split('').reverse().join('');
+            }
+         },
+         computed: {
+            reverse(){
+               return this.name.split('').reverse().join('');
+            }
+         }
+      })
+   </script>
 </body>
 </html>
