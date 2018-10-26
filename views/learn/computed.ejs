@@ -12,24 +12,69 @@
       <p>翻转值：{{name.split('').reverse().join('')}}</p>
       <!--不会缓存，每次调用都会重新请求-->
       <p>函数调用：{{reverseName()}}</p>
-      <!--会缓存，多处调用，都会使用缓存值，使用计算量大，不经常改变的时候使用-->
+      <!--会缓存，多处调用，都会使用缓存值(只在相关依赖发生改变时它们才会重新求值)，适于计算量大，不经常改变的时候使用-->
       <p>计算属性：{{reverse}}</p>
+      <p>全名：{{fullName}}</p>
+      <p>
+         <input type="text" v-model="question"/>
+         <span>{{questionShow}}</span>
+      </p>
+
+      <button @click="setFullName">设置计算属性</button>
    </div>
    <script src="/scripts/assets/vue.min.js"></script>
    <script>
       let vm = new Vue({
          el: '#app',
          data:{
-            name: 'Hello Jack'
+            name: 'Hello Jack',
+            firstName: 'zhang',
+            lastName: 'sanfeng',
+            question: ''
          },
          methods: {
             reverseName(){
                return this.name.split('').reverse().join('');
+            },
+            setFullName(){
+               this.fullName = 'Token Mark'
+            },
+            showQuestion(newQuestion, oldQuestion){
+               //alert(question)
+               console.log(newQuestion);
+               console.log(oldQuestion);
             }
          },
          computed: {
             reverse(){
                return this.name.split('').reverse().join('');
+            },
+            // fullName(){//get()
+            //    return this.firstName + ' ' + this.lastName;
+            // }
+            fullName: {
+               get(){//等价于fullName()
+                  return this.firstName + ' ' + this.lastName;
+               },
+               //不常用
+               set(val){
+                  let nameArr = val.split(' ');
+                  this.firstName = nameArr[0];
+                  this.lastName = nameArr[1];
+               }
+            },
+            questionShow(){
+               //并不执行
+               console.log('++++++++++++++++++++++++++++++')
+               return this.question;
+            }
+         },
+         //watch:监控某个属性变化，进行一系列的变化,方法时使用（数据变化时执行异步或开销较大的操作）；可以执行异步操作
+         //computed:必须返回某个属性，依赖某个属性的变化而变化
+         watch: {
+            question(newQuestion, oldQuestion){
+               console.log('======================');
+               this.showQuestion(newQuestion, oldQuestion);
             }
          }
       })
