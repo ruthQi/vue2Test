@@ -46,6 +46,14 @@ Router.get('/exercise', function (req, res, next) {
 Router.get('/computed', function (req, res, next) {
    res.render('learn/computed')
 });
+//全局组件
+Router.get('/globalCom', function (req, res, next){
+   res.render('learn/globalCom');
+});
+//局部组件
+Router.get('/localCom', function (req, res, next) {
+   res.render('learn/localCom');
+});
 
 
 

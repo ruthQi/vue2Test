@@ -19,7 +19,12 @@
          el:'#app',
          data: {
             msg:'今天天气很好'
-         }
+         },
+         created() {
+            setTimeout(()=>{
+               this.msg = '今天天气很好呀呀'
+            }, 1000)
+         },
       })
    </script>
 </body>

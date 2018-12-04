@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Vue-局部组件</title>
+</head>
+<body>
+   <div id="app">
+      <my-date></my-date>
+      <my-color></my-color>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      //1.注册一个组件
+      let Profile = Vue.extend({
+         data(){
+            return{
+               date:''
+            }
+         },
+         template: `
+            <div>
+               <input type="date" v-model="date"/>
+               <p>今天是{{date}}</p>   
+            </div>
+         `
+      });
+      let Profile2 = Vue.extend({
+         data(){
+            return {
+               color:'#000'
+            }
+         },
+         template: `
+            <div>
+               <input type="color" v-model="color"/>
+               <p>我的颜色是：{{color}}</p>   
+            </div>
+         `
+      })
+      //注册局部组件，在哪个实例中注册在哪个实例中使用，并不是所有实例都可以使用
+      new Vue({
+         el: '#app',
+         data: {
+
+         },
+         //注册局部组件
+         components: {
+            'my-date': Profile,
+            'my-color': Profile2
+         }
+      });
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>vue-全局组件</title>
+</head>
+<body>
+   <div id="app">
+      <span>{{msg}}</span>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <button-counter></button-counter>
+      <my-date></my-date>
+      <my-date></my-date>
+   </div>
+   <div id="app1">
+      <span>{{msg}}</span>
+      <my-date></my-date>
+      <my-date></my-date>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      //全剧组件可用于多个实例
+      //组件中，data只能使用return返回的形式，使用data:{msg:'xxxxx'}这种形式报错
+
+      //1.创建组件构造器
+      let Profile = Vue.extend({
+         //数据返回使用这种方式，使用data:{myDate:''}报错；myDate未定义
+         data(){
+            return{
+               myDate: ''
+            }
+         },
+         //模板选项
+         template: `
+            <div>
+               <input type="date" v-model="myDate"/>
+               <p>今天是{{myDate}}</p>
+            </div>
+         `
+      });
+      //2.注册全局组件
+      Vue.component('my-date', Profile);
+      
+      //注册全局组件button-counter（精简方式）
+      Vue.component('button-counter', {
+         //组件中，data只能使用return返回的形式，使用data:{msg:'xxxxx'}这种形式报错
+         data(){
+            return {
+               count: 0
+            }
+         },
+         template: `
+            <button v-on:click="count++">You click me {{count}} times</button>
+         `
+      })
+
+      new Vue({
+         el: '#app',
+         data(){
+            return{
+               msg:'我是app'
+            }
+         }
+      })
+
+      new Vue({
+            el: '#app1',
+            data: {
+               msg:'今天是个好日子！'
+            }
+         })
+   </script>
+</body>
+</html>
