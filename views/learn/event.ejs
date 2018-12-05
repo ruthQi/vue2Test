@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>event事件</title>
+</head>
+<body>
+   <div id="app">
+      <my-btn @btn-click="allCounter()"></my-btn>
+      <my-btn @btn-click="allCounter()"></my-btn>
+
+      <p>所有按钮一共被点击了{{totalCounter}}次</p>
+   </div>
+
+   <template id="my-btn">
+      <button @click="total()">按钮被点击了{{counter}}次</button>
+   </template>
+
+
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+
+      Vue.component('my-btn', {
+         template: '#my-btn',
+         data(){
+            return{
+               counter: 0
+            }
+         },
+         methods: {
+            total(){
+               this.counter ++;
+               //推荐使用kebab-case，v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)
+               this.$emit('btn-click')
+            }
+         }
+      })
+      new Vue({
+         el: '#app',
+         data: {
+            totalCounter: 0
+         },
+         methods: {
+            allCounter(){
+               this.totalCounter++;
+            }
+         }
+      })
+   </script>
+</body>
+</html>

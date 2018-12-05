@@ -65,13 +65,20 @@ Router.get('/template', function(req, res, next){
 Router.get('/script', function(req, res, next){
    res.render('learn/script')
 })
-//父子组件通信
+//父组件传值给子组件
 Router.get('/communication', function(req, res, next){
    res.render('learn/communication')
 })
 Router.get('/multi-communication', function (req, res, next) {
    res.render('learn/multi-communication')
 })
+
+//子组件传值给父组件（自定义事件$on监听, $emit触发）
+Router.get('/event', function(req, res, next){
+   res.render('learn/event')
+})
+
+
 
 
 
