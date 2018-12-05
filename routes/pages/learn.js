@@ -54,6 +54,24 @@ Router.get('/globalCom', function (req, res, next){
 Router.get('/localCom', function (req, res, next) {
    res.render('learn/localCom');
 });
+//父子组件
+Router.get('/parentCom', function (req, res, next){
+   res.render('learn/parentCom')
+})
+//template和script模板
+Router.get('/template', function(req, res, next){
+   res.render('learn/template')
+})
+Router.get('/script', function(req, res, next){
+   res.render('learn/script')
+})
+//父子组件通信
+Router.get('/communication', function(req, res, next){
+   res.render('learn/communication')
+})
+Router.get('/multi-communication', function (req, res, next) {
+   res.render('learn/multi-communication')
+})
 
 
 

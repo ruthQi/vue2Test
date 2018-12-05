@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>父子组件通信</title>
+</head>
+<body>
+   <div id="app">
+      <my-child title="我是搜索按钮" imgsrc="/images/base64/icon-search.png"></my-child>
+      <my-child title="我是清空按钮" imgsrc="/images/base64/icon-clear.png"></my-child>
+   </div>
+
+   <template id="my-child">
+      <div>
+         <img :src="imgsrc" width="40"/>
+         <h2>{{title}}</h2>
+      </div>
+   </template>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      //props down, events up:父向子通信通过props,子向父通信通过 $emit events
+      //父子组件通信通过props
+      Vue.component('my-child', {
+         template:'#my-child',
+         props:['title', 'imgsrc']
+      })
+      new Vue({
+         el:'#app'
+      })
+   </script>
+</body>
+</html>

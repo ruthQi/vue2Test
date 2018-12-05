@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>父子组件通信</title>
+</head>
+<body>
+   <div id="app">
+      <parent-com></parent-com>
+   </div>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      /*
+         组件注册命名：
+         1.短横线分隔命名(kebab-case)：parent-dom
+         2.驼峰式命名(PascalCase)：ParentDom
+         直接在 DOM (即非字符串的模板) 中使用时只有 kebab-case 是有效的。
+      */
+      let Child1 = Vue.extend({
+         template: `<img src="/images/base64/icon-search.png" width="200"/>`
+      });
+      let Child2 = Vue.extend({
+         template:`<p>其实我是搜索按钮</p>`
+      });
+      //使用ParentCom命名组件，引用时不能识别
+      Vue.component('parent-com', {
+         components: {
+            'my-child1': Child1,
+            'my-child2': Child2
+         },
+         template: `
+            <div>
+               <my-child1></my-child1>
+               <my-child2></my-child2>
+            </div>
+         `
+      })
+      new Vue({
+         el:'#app'
+      })
+   </script>
+</body>
+</html>

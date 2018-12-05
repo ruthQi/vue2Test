@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>script模板</title>
+</head>
+
+<body>
+   <div id="app">
+      <my-div></my-div>
+   </div>
+
+   <!--script模板数据-->
+   <script type="text/template" id="my-div">
+      <div>
+         <img src="/images/base64/icon-search.png" width="200" />
+         <p>我是搜索按钮</p>
+      </div>
+   </script>
+
+   <script src="/scripts/assets/vue.min.js"></script>
+
+   <script>
+      Vue.component('my-div', {
+         template: '#my-div'
+      })
+      new Vue({
+         el: '#app'
+      })
+   </script>
+</body>
+
+</html>

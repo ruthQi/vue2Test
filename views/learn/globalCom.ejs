@@ -44,13 +44,18 @@
       //2.注册全局组件
       Vue.component('my-date', Profile);
       
+
+      let data = {
+         count: 0
+      }
       //注册全局组件button-counter（精简方式）
       Vue.component('button-counter', {
          //组件中，data只能使用return返回的形式，使用data:{msg:'xxxxx'}这种形式报错
-         data(){
+         data(){//data以函数的形式，每次创建一个新的对象，所以组件数据不会共享
             return {
                count: 0
             }
+            //return data;//组件间数据共享
          },
          template: `
             <button v-on:click="count++">You click me {{count}} times</button>

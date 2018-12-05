@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>多层组件通信</title>
+</head>
+<body>
+   <div id="app">
+      <my-parent :imgsrc="imgsrc" :imgtitle="title"></my-parent>
+   </div>
+
+   <template id="my-img">
+      <img :src="imgsrc" width="40"/>
+   </template>
+
+   <template id="my-title">
+      <h2>{{title}}</h2>
+   </template>
+
+   <template id="my-parent">
+      <div>
+         <my-child1 :imgsrc="imgsrc"></my-child1>
+         <my-child2 :title="imgtitle"></my-child2>
+      </div>
+   </template>
+
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      let Child1 = Vue.extend({
+         template: '#my-img',
+         props: ['imgsrc']
+      });
+      
+      let Child2 = Vue.extend({
+         template: '#my-title',
+         props: ['title']
+      })
+
+      Vue.component('my-parent', {
+         props: ['imgtitle', 'imgsrc'],
+         components:{
+            'my-child1': Child1,
+            'my-child2': Child2
+         },
+         template: '#my-parent'
+      })
+      new Vue({
+         el: '#app',
+         data: {
+            imgsrc: '/images/base64/icon-search.png',
+            title: '我是搜索按钮'
+         }
+      })
+   </script>
+</body>
+</html>
