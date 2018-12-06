@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>keep-alive组件缓存</title>
+</head>
+<body>
+   <div id="app">
+      <button v-for="item in tabs" @click="currentTab = item">{{item}}</button>
+
+      <!--记录上次的选择-->
+      <keep-alive>
+         <component :is="curComponent"></component>
+      </keep-alive>
+      <!--不记录选择-->
+      <component :is="curComponent"></component>
+
+
+      <!--tab切换的另一种方式-->
+      
+      <button v-for="(item, index) in tabs" @click="activeTab = index + 1">{{item}}</button>
+      <div v-show="activeTab == 1">
+         I is fruit tab
+      </div>
+      <div v-show="activeTab == 2">
+         I is motion tab
+      </div>
+      
+   </div>
+   <template id="my-fruit">
+      <div>
+         <ul>
+            <li v-for="item in fruitArr" @click="selectedObj = item">{{item.name}}</li>
+         </ul>
+         <div v-if="selectedObj">
+            {{selectedObj.desc}}
+         </div>
+      </div>
+   </template>
+
+   <template id="my-motion">
+      <p>I love PingPang</p>
+   </template>
+
+   <script src="/scripts/assets/vue.min.js"></script>
+
+
+   <script>
+      Vue.component('tab-fruit', {
+         template: '#my-fruit',
+         data(){
+            return{
+               fruitArr: [
+                  {name: 'apple', desc: 'I am is an apple'},
+                  { name: 'banana', desc: 'I am is a banana' },
+                  { name: 'orange', desc: 'I am is an orange' }
+               ],
+               selectedObj: null
+            }
+         }
+      });
+      Vue.component('tab-motion', {
+         template: '#my-motion'
+      })
+      new Vue({
+         el: '#app',
+         data: {
+            currentTab: 'fruit',
+            tabs: ['fruit', 'motion'],
+            activeTab: 1
+         },
+         computed: {
+            curComponent(){
+               return `tab-${this.currentTab}`
+            }
+         }
+      })
+   </script>
+</body>
+</html>

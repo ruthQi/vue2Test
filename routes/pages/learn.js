@@ -78,6 +78,29 @@ Router.get('/event', function(req, res, next){
    res.render('learn/event')
 })
 
+//自定义组件的v-model
+Router.get('/v-model', function(req, res, next){
+   res.render('learn/v-model');
+}) 
+
+//插槽-slot
+Router.get('/anony-slot', function(req, res, next){
+   res.render('learn/anony-slot')
+})
+Router.get('/name-slot', function(req, res, next){
+   res.render('learn/name-slot')
+})
+
+//keep-alive
+Router.get('/keep-alive', function(req, res, next){
+   res.render('learn/keep-alive')
+})
+
+//路由
+Router.get('/router', function(req, res, next){
+   res.render('learn/router');
+})
+
 
 
 

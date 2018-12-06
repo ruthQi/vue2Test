@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>实名slot</title>
+</head>
+<body>
+   <!--
+      实名插槽：slot=""这个要与name=""对应上
+   -->
+   <div id="app">
+      <my-computer>
+         <div slot="cpu">Inter i8</div>
+         <img src="/images/base64/icon-clear.png" width="40" slot="gpu"/>
+         <p slot="memory">128G</p>
+         <input type="color" slot="hard-panel"/>
+      </my-computer>
+   </div>
+
+   <template id="my-computer">
+      <div>
+         <slot name="cpu">这里是插cpu的</slot>
+         <slot name="gpu">这里是插gpu的</slot>
+         <slot name="memory">这里是插内存条的</slot>
+         <slot name="hard-panel">这里是插硬盘的</slot>
+      </div>
+   </template>
+   <script src="/scripts/assets/vue.min.js"></script>
+   <script>
+      Vue.component('my-computer', {
+         template: '#my-computer'
+      })
+      new Vue({
+         el: '#app'
+      })
+   </script>
+</body>
+</html>
