@@ -1,0 +1,13 @@
+ul,li{
+   list-style: none;
+}
+
+.home-container{
+   display: flex;
+   .slide-bar{
+      width: 300px;
+   }
+   .content{
+      flex-grow: 1;
+   }
+}

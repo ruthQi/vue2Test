@@ -99,7 +99,7 @@ Router.get('/keep-alive', function(req, res, next){
 //路由
 Router.get('/router', function(req, res, next){
    res.render('learn/router');
-})
+});
 
 
 

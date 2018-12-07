@@ -14,4 +14,8 @@ module.exports = function(app) {
       res.render('pages/vuex')
     })
 
+    app.get('/router', function(req, res, next){
+      res.render('pages/router')
+    })
+
 };
